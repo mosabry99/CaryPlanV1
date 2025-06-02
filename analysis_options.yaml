@@ -1,0 +1,99 @@
+# This file configures the Dart analyzer and linter.
+#
+# More information:
+#   - Analysis options: https://dart.dev/tools/analysis
+#   - Linter rules: https://dart-lang.github.io/linter/lints/
+#
+# This setup uses flutter_lints as a base and then applies the stricter
+# very_good_analysis rule set for enhanced code quality and consistency.
+
+include: package:flutter_lints/flutter.yaml
+
+# For even stricter linting and best practices, include very_good_analysis.
+# This package provides a curated set of analysis options that are generally
+# more strict than flutter_lints alone, promoting high-quality code.
+# Rules from very_good_analysis will augment or override those from flutter_lints.
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  # Strong mode for type safety
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+
+  # Exclude generated files from analysis (common practice)
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    # - "lib/generated_plugin_registrant.dart" # If it exists and causes issues
+
+  errors:
+    # You can customize the severity of specific lint rules here.
+    # For example, to treat missing_required_param as an error:
+    # missing_required_param: error
+    #
+    # To ignore a specific lint rule across the entire project:
+    # deprecated_member_use_from_same_package: ignore
+
+    # Example: Making some VGV rules warnings instead of errors if they are too strict initially
+    # public_member_api_docs: warning # VGV makes this an error, can be a lot for new projects
+
+linter:
+  rules:
+    # Add or override specific lint rules here.
+    # Rules enabled in flutter_lints and very_good_analysis are already active.
+    # This section can be used to:
+    #   - Enable additional rules not in the included packages.
+    #   - Disable rules from the included packages if necessary (though generally not recommended
+    #     if aiming for the strictness of very_good_analysis).
+    #   - Customize rule behavior if the rule supports it.
+
+    # Example: Enforcing single quotes (if not already covered or to override)
+    # prefer_single_quotes: true
+
+    # Example: Disabling a rule from very_good_analysis if it's problematic for the project
+    # (Use with caution, as it reduces the strictness provided by VGV)
+    # avoid_positional_boolean_parameters: false
+
+    # Flutter specific rules from flutter_lints are included by default.
+    # Very Good Analysis rules are also included and are generally stricter.
+
+    # Ensure common best practices are enforced:
+    always_declare_return_types: true
+    avoid_empty_else: true
+    avoid_relative_lib_imports: true
+    avoid_shadowing_type_parameters: true
+    avoid_types_as_parameter_names: true
+    await_only_futures: true
+    camel_case_extensions: true
+    camel_case_types: true
+    cancel_subscriptions: true
+    control_flow_in_finally: true
+    empty_statements: true
+    hash_and_equals: true
+    implicit_call_tearoffs: true # VGV enables this
+    no_leading_underscores_for_library_prefixes: true
+    no_leading_underscores_for_local_identifiers: true # VGV enables this
+    package_prefixed_library_names: true
+    prefer_final_fields: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
+    prefer_interpolation_to_compose_strings: true
+    slash_for_doc_comments: true
+    test_types_in_equals: true
+    throw_in_finally: true
+    type_annotate_public_apis: true # Good practice, often part of strict sets
+    unawaited_futures: true # VGV enables this
+    unnecessary_await_in_return: true # VGV enables this
+    unnecessary_lambdas: true
+    unnecessary_parenthesis: true
+    use_super_parameters: true # For Flutter 3.0+
+    # require_trailing_commas: true # Often enabled for better formatting diffs
+
+    # Flutter specific good practices (many are in flutter_lints/VGV already)
+    use_key_in_widget_constructors: true
+    # avoid_print: true # Consider enabling in production code
+
+    # Rules from very_good_analysis will take precedence if defined in both.
+    # This list is illustrative; rely on the included packages for comprehensive coverage.
+    # Refer to the documentation for flutter_lints and very_good_analysis for their complete rule sets.

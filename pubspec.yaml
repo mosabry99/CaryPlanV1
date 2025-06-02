@@ -50,18 +50,31 @@ dependencies:
   # UI and styling
   flutter_screenutil: ^5.9.0
   google_fonts: ^6.1.0
-  flutter_svg: ^2.0.9
-  shimmer: ^3.0.0
+  flutter_svg: ^2.0.9 # For SVG asset support if needed
+  shimmer: ^3.0.0 # For loading animations
   
   # Local storage
   shared_preferences: ^2.2.2
   
+  # Date formatting
+  intl: ^0.18.1 # Added for date formatting
+
   # Optional Firebase (commented out by default)
   # firebase_core: ^2.24.2
   # firebase_auth: ^4.15.3
   # cloud_firestore: ^4.13.6
   # firebase_storage: ^11.5.6
   # flutter_dotenv: ^5.1.0
+  
+  # Optional: For sharing functionality
+  # share_plus: ^7.2.1
+
+  # Optional: For launching URLs
+  # url_launcher: ^6.2.1
+
+  # Optional: For package info
+  # package_info_plus: ^5.0.1
+
 
 dev_dependencies:
   flutter_test:
