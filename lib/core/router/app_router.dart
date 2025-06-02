@@ -57,10 +57,11 @@ final GoRouter appRouter = GoRouter(
       pageBuilder: (context, state) {
         // Extract query parameters if any
         final category = state.uri.queryParameters['category'];
+        final initialQuery = state.uri.queryParameters['query'];
         
         return CustomTransitionPage(
           key: state.pageKey,
-          child: CarePlanListScreen(category: category),
+          child: CarePlanListScreen(category: category, initialQuery: initialQuery),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
               position: Tween<Offset>(
@@ -158,24 +159,27 @@ extension GoRouterExtension on BuildContext {
     );
   }
   
-  /// Push a named route
-  void pushNamed(String name, {Map<String, String> params = const {}, Map<String, String> queryParams = const {}}) {
-    GoRouter.of(this).pushNamed(
-      name,
-      pathParameters: params,
-      queryParameters: queryParams,
-    );
-  }
+  // Removed conflicting pushNamed method. GoRouter provides its own `context.pushNamed(...)`.
+  // void pushNamed(String name, {Map<String, String> params = const {}, Map<String, String> queryParams = const {}}) {
+  //   GoRouter.of(this).pushNamed(
+  //     name,
+  //     pathParameters: params,
+  //     queryParameters: queryParams,
+  //   );
+  // }
   
   /// Navigate to the care plan list with optional category filter
-  void goToCarePlanList({String? category}) {
+  void goToCarePlanList({String? category, String? query}) {
     final queryParams = <String, String>{};
     if (category != null) {
       queryParams['category'] = category;
     }
+    if (query != null) {
+      queryParams['query'] = query;
+    }
     
     GoRouter.of(this).goNamed(
-      'carePlanList',
+      'carePlanList', // Name of the route
       queryParameters: queryParams,
     );
   }
@@ -183,7 +187,7 @@ extension GoRouterExtension on BuildContext {
   /// Navigate to a specific care plan detail
   void goToCarePlanDetail(String id) {
     GoRouter.of(this).goNamed(
-      'carePlanDetail',
+      'carePlanDetail', // Name of the route
       pathParameters: {'id': id},
     );
   }
@@ -193,6 +197,7 @@ extension GoRouterExtension on BuildContext {
     if (GoRouter.of(this).canPop()) {
       GoRouter.of(this).pop();
     } else {
+      // If cannot pop, go to home as a fallback
       GoRouter.of(this).go(AppRoutes.home);
     }
   }

@@ -17,6 +17,10 @@ class SettingsScreen extends HookConsumerWidget {
   final String _appVersion = '1.0.0'; 
   final String _buildNumber = '1';
 
+  // Key for SharedPreferences, should match the one in LocalStorageService
+  static const String _kFavoriteCarePlansKey = 'favorite_care_plans';
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
@@ -109,7 +113,8 @@ class SettingsScreen extends HookConsumerWidget {
         title: 'Clear Favorites',
         content: 'Are you sure you want to remove all your favorite care plans?',
         onConfirm: () async {
-          await localStorageService.saveValue(_kFavoriteCarePlans, <String>[]); // Assuming _kFavoriteCarePlans is accessible or use a dedicated method
+          // Use the same key as defined in LocalStorageService or use a dedicated method from there
+          await localStorageService.saveValue(_kFavoriteCarePlansKey, <String>[]); 
           ref.invalidate(favoriteCarePlansProvider);
           ref.invalidate(allCarePlansProvider); // Invalidate if they show fav status
           ref.invalidate(featuredCarePlansProvider);
@@ -117,7 +122,6 @@ class SettingsScreen extends HookConsumerWidget {
         },
       );
     }
-    const String _kFavoriteCarePlans = 'favorite_care_plans'; // Key from LocalStorageService
 
     void _clearRecentSearches() {
        _showConfirmationDialog(
@@ -213,7 +217,7 @@ class SettingsScreen extends HookConsumerWidget {
           _buildSectionTitle(context, 'Data Management'),
            _buildSettingItem(
             context,
-            icon: Icons.favorite_remove_outlined,
+            icon: Icons.delete_sweep_outlined, // Corrected Icon
             title: 'Clear Favorites',
             subtitle: 'Remove all your saved favorite care plans.',
             onTap: _clearFavorites,

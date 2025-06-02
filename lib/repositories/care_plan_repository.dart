@@ -10,7 +10,7 @@ import '../core/services/local_storage_service.dart';
 /// This allows other parts of the application to access the repository
 /// for data operations related to care plans.
 final carePlanRepositoryProvider = Provider<CarePlanRepository>((ref) {
-  return CarePlanRepository(ref.read(localStorageServiceProvider));
+  return CarePlanRepository(ref.watch(localStorageServiceProvider));
 });
 
 /// Provider for the list of all care plans.
@@ -122,11 +122,12 @@ class CarePlanRepository {
           await rootBundle.loadString('assets/data/care_plans.json');
       final List<dynamic> data = json.decode(response) as List<dynamic>;
       _cachedCarePlans = data
-          .map((json) => CarePlanModel.fromJson(json as Map<String, dynamic>))
+          .map((jsonMap) => CarePlanModel.fromJson(jsonMap as Map<String, dynamic>))
           .toList();
       return _updateFavoritesStatus(_cachedCarePlans!);
     } catch (e) {
       // In a real app, handle this error more gracefully (e.g., logging, showing error message)
+      // ignore: avoid_print
       print('Error loading care plans: $e');
       return [];
     }
@@ -281,6 +282,7 @@ class CarePlanRepository {
 final localStorageServiceProvider = Provider<LocalStorageService>((ref) {
   if (!LocalStorageService.isInitialized) {
     // This should ideally be called in bootstrap, but as a fallback:
+    // ignore: avoid_print
     print("LocalStorageService accessed before initialization. Attempting to initialize now.");
     LocalStorageService.initialize(); 
   }

@@ -18,7 +18,7 @@ import 'core/services/local_storage_service.dart';
 /// - Initializing services
 /// - Providing a builder for the main app widget
 Future<void> bootstrap({
-  required FutureOr<Widget> Function(BuildContext, Widget?) builder,
+  required FutureOr<Widget> Function() builder, // Changed signature: No BuildContext or Widget? params
 }) async {
   // Catch Flutter errors
   FlutterError.onError = (details) {
@@ -38,7 +38,7 @@ Future<void> bootstrap({
       await _initializeServices();
       
       // Run the app
-      runApp(await builder(null, null));
+      runApp(await builder()); // Changed call: No arguments passed to builder
     },
     (error, stackTrace) {
       log(error.toString(), stackTrace: stackTrace);
@@ -98,10 +98,12 @@ class CarePlanLibraryApp extends ConsumerWidget {
 
 /// Provider for the app's theme mode.
 final themeModeProvider = StateProvider<ThemeMode>((ref) {
-  return ThemeMode.system;
+  final localStorageService = ref.watch(localStorageServiceProvider); // Ensure service is watched
+  return localStorageService.getThemeMode();
 });
 
 /// Provider for the app's text scale factor.
 final textScaleFactorProvider = StateProvider<double>((ref) {
-  return 1.0;
+  final localStorageService = ref.watch(localStorageServiceProvider); // Ensure service is watched
+  return localStorageService.getTextScaleFactor();
 });

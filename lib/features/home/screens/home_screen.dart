@@ -25,8 +25,9 @@ class HomeScreen extends HookConsumerWidget {
 
     void performSearch(String query) {
       if (query.isNotEmpty) {
+        // Use route name for pushNamed
         context.pushNamed(
-          AppRoutes.carePlanList.substring(1), // go_router names don't start with /
+          'carePlanList', 
           queryParameters: {'query': query},
         );
       }
@@ -129,8 +130,9 @@ class HomeScreen extends HookConsumerWidget {
                 ),
                 label: Text(category),
                 onPressed: () {
+                  // Use route name for pushNamed
                   context.pushNamed(
-                    AppRoutes.carePlanList.substring(1),
+                    'carePlanList',
                     queryParameters: {'category': category},
                   );
                 },
@@ -281,10 +283,12 @@ class HomeScreen extends HookConsumerWidget {
       case 'psychiatric/mental health':
         return Icons.self_improvement_outlined;
       case 'orthopedic/surgical':
+      case 'surgical':
         return Icons.medical_services_outlined;
       case 'maternal-newborn':
         return Icons.pregnant_woman_outlined;
       case 'critical care':
+      case 'critical care/integumentary':
         return Icons.monitor_heart_outlined;
       default:
         return Icons.category_outlined;

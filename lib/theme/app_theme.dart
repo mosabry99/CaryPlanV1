@@ -116,7 +116,7 @@ class AppTheme {
       ),
       
       // Card theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData( // Corrected: CardTheme to CardThemeData
         color: colorScheme.surface,
         elevation: 2,
         shape: RoundedRectangleBorder(
@@ -233,7 +233,7 @@ class AppTheme {
       ),
       
       // Dialog theme
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData( // Corrected: DialogTheme to DialogThemeData
         backgroundColor: colorScheme.surface,
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -286,7 +286,7 @@ class AppTheme {
       ),
       
       // Tab bar theme
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData( // Corrected: TabBarTheme to TabBarThemeData
         labelColor: colorScheme.primary,
         unselectedLabelColor: isLight ? _lightTextSecondary : _darkTextSecondary,
         indicatorColor: colorScheme.primary,
