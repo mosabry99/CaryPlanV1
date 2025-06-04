@@ -93,7 +93,7 @@ class FavoritesScreen extends ConsumerWidget {
               onPressed: () {
                 // Navigate to a screen where users can find care plans, e.g., home or list screen
                 if (context.canPop()) {
-                  context.pop(); // Go back if possible
+                  context.goBack(); // Go back if possible
                 }
                 context.go(AppRoutes.home); // Or push to a specific list screen
               },
