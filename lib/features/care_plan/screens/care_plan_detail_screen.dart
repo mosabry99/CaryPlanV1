@@ -477,7 +477,7 @@ class CarePlanDetailScreen extends HookConsumerWidget {
               Text(message, style: theme.textTheme.bodyMedium, textAlign: TextAlign.center),
               SizedBox(height: AppTheme.spacing24),
               ElevatedButton(
-                onPressed: () => context.pop(),
+                onPressed: () => context.goBack(),
                 child: const Text('Go Back'),
               ),
             ],

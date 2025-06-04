@@ -21,7 +21,7 @@ void main() async {
   
   // Bootstrap the application
   bootstrap(
-    builder: (_, __) => const ProviderScope(
+    builder: () => const ProviderScope( // Fixed: removed unused parameters
       child: CarePlanLibraryApp(),
     ),
   );
