@@ -1,0 +1,6 @@
+flutter/
+flutter.tar.xz
+.flutter-plugins*
+.dart_tool/
+build/
+.pub-cache/
